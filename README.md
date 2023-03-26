@@ -1,17 +1,15 @@
 ## Age in Seconds
 
 ## Description
-determination of elapsed seconds from the date
+Determination of elapsed seconds from the date.
 
 ## Features
 Allows the user to enter a date and calculate the number of seconds that have passed or not yet passed.
 Returns the number and number name of the result in `Hungarian`.
 Uses two external classes: MZElapsedSeconds and MZNumberConvert.
----
 
 ## Image
-![alt text]()
----
+![alt text](https://github.com/MagyarZoli/AgeInSeconds/blob/master/image/Image1.png)
 
 Installation
 To use this program, you will need to have Java installed on your computer. You can download Java from the [official Java website](https://www.java.com/en/download/).
@@ -20,14 +18,17 @@ Once you have Java installed, follow these steps to install and run the program:
 
 Clone this repository to your local machine using the command:
 ```bash
-git clone 
+git clone https://github.com/MagyarZoli/AgeInSeconds.git
 ```
+or download to zip file:
+[Download ZIP](github.com/MagyarZoli/AgeInSeconds/archive/refs/heads/master.zip)
 
 ## MZElapsedSeconds and MZNumberConvert
 Please note that this project uses the following external classes:
 
 - [MZElapsedSeconds](https://github.com/MagyarZoli/MZElapsedSeconds)
 - [MZNumberConvert](https://github.com/MagyarZoli/MZNumberConvert)
+
 For more information about these classes, please refer to their respective documentation.
 
 ## Example
@@ -76,6 +77,3 @@ Magyar Zoltán
 
 ## Contact
 magyarz95@gmail.com
-
-## Image
-![alt text]()
