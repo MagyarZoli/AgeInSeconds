@@ -49,6 +49,15 @@ It inherits this and changes its arguments to the Age class
 
     public abstract void runAge();
 ```
+```java
+    @Override
+    public void runAge(){
+        textNumber.setText(new DecimalFormat().format(Long.parseLong(resultOut())));
+        BigInteger bigInteger = new BigInteger(resultOut());
+        String[] splitArray = (numberConvert.conversionNumberName(bigInteger, "hu")).split("[.]");
+        splitText(splitArray);
+    }
+```
 
 TimePicker class method for selecting a date and passing the result as a argument to the Age class.
 Using ActionListener which is implemented for GuiButton
