@@ -20,8 +20,6 @@ Clone this repository to your local machine using the command:
 ```bash
 git clone https://github.com/MagyarZoli/AgeInSeconds.git
 ```
-or download to zip file:
-[Download ZIP](github.com/MagyarZoli/AgeInSeconds/archive/refs/heads/master.zip)
 
 ## MZElapsedSeconds and MZNumberConvert
 Please note that this project uses the following external classes:
