@@ -34,7 +34,7 @@ extends MZElapsedSeconds{
 
     @Override
     public void runAge(){
-        textNumber.setText(new DecimalFormat().format(Integer.parseInt(resultOut())));
+        textNumber.setText(new DecimalFormat().format(Long.parseLong(resultOut())));
         BigInteger bigInteger = new BigInteger(resultOut());
         String[] splitArray = (numberConvert.conversionNumberName(bigInteger, "hu")).split("[.]");
         splitText(splitArray);
