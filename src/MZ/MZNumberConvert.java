@@ -14,156 +14,308 @@ import java.math.BigInteger;
  * @param number number you want to convert
  * @param language language selection, according to which spelling rules to convert the number
  * @see  java.lang.ArrayIndexOutOfBoundsException
- * @since 1.2
+ * @see  java.math.BigInteger
+ * @since 1.3
  * @author <a href=https://github.com/MagyarZoli>Magyar Zoltán</a>
  */
 public class MZNumberConvert { 
-    private static final String[] hun1 = new String[]{"","egy","kettő","három","négy","öt","hat","hét","nyolc","kilenc"};
-    private static final String[] hun2 = new String[]{"","","két","három","négy","öt","hat","hét","nyolc","kilenc"};
-    private static final String[] hun3 = new String[]{"","egy","két","három","négy","öt","hat","hét","nyolc","kilenc"};
-    private static final String[] hun4 = new String[]{"","tizen","huszon","harminc","negyven","ötven","hatvan","hetven","nyolcvan","kilencven"};
-    private static final String[] hun5 = new String[]{"nulla","tíz","húsz"};
-    private static final String[] hun6 = new String[]{"száz","ezer","milllió","milliárd"};
-    private static final String[] hun7 = new String[]{"","minusz "};
-    private static String splitStr;
+    private final String[] hun1 = new String[]{"","egy","kettő","három","négy","öt","hat","hét","nyolc","kilenc"};
+    private final String[] hun2 = new String[]{"","","két","három","négy","öt","hat","hét","nyolc","kilenc"};
+    private final String[] hun3 = new String[]{"","egy","két","három","négy","öt","hat","hét","nyolc","kilenc"};
+    private final String[] hun4 = new String[]{"","tizen","huszon","harminc","negyven","ötven","hatvan","hetven","nyolcvan","kilencven"};
+    private final String[] hun5 = new String[]{"nulla","tíz","húsz"};
+    private final String[] hun6 = new String[]{"száz","ezer","milllió","milliárd"};
+    private final String[] hun7 = new String[]{"","minusz "};
+    private final String[] languages = new String[]{"hu"};
+    private char[] charArray;
+    private int[] numberArray;
+    private long compareValue;
+    private int count;
+    private int negative;
+    private String split;
 
+    /**
+     * By default, it does not split the number name.
+     */
     public MZNumberConvert(){
-        MZNumberConvert.splitStr="";
+        this.split="";
     }
     
-    public MZNumberConvert(String splitStr){
-        if(splitStr==null){
-            MZNumberConvert.splitStr="";
+    /**
+     * Separates the name of the number into several pieces based on the specified character/string.
+     * If the argument is null, it does not split the name of the number.
+     * @param splitStr separates the name of the number
+     */
+    public MZNumberConvert(String split){
+        if(split==null){
+            this.split="";
         }
-        else{
-            MZNumberConvert.splitStr=splitStr;
-        }
+        this.split = split;
     }
 
-    public String conversionNumberName(BigInteger number, String language){
+    /**
+     * Char/String can be specified, which separates the name of the number into several pieces.
+     * @param split separates the name of the number
+     */
+    public void setSplit(String split){
+        this.split = split;
+    }
+
+    /**
+     * Returns which char or String the character is separated from.
+     * If not specified, the value returns an empty character.
+     * @return get char/String separates the name of the number
+     */
+    public String getSplit(){
+        return this.split;
+    }
+
+    /**
+     * Converts the number into a text number name according to the specified number and specified language.
+     * <p>list of available languages:</p>
+     * <ul>
+     *  <li>"hu" - Hungarian</li>
+     * </ul>
+     * @param number of type long
+     * @param language 
+     * @see MZNumberConvert#hunNumberName(long)
+     * @see MZNumberConvert#languages()
+     * @throws Error if the specified language is not available.
+     */
+    public String conversionNumberName(long number, String language){
         if(language==("hu").toLowerCase()){
             return hunNumberName(number);
-        }   
-        return null;
+        } 
+        throw new Error(language+" specified language nothing! choose from the language list: "+languages()); 
     }
 
-    private static String hunNumberName(BigInteger number){
-        int compareValue = number.compareTo(new BigInteger("0"));
+    /**
+     * Converts the number into a text number name according to the specified number and specified language.
+     * <p>list of available languages:</p>
+     * <ul>
+     *  <li>"hu" - Hungarian</li>
+     * </ul>
+     * @param number of type BigInteger
+     * @param language 
+     * @see java.math.BigInteger
+     * @see MZNumberConvert#hunNumberNameBig(BigInteger)
+     * @see MZNumberConvert#languages()
+     * @throws Error if the specified language is not available.
+     */
+    public String conversionNumberName(BigInteger number, String language){
+        if(language==("hu").toLowerCase()){
+            return hunNumberNameBig(number);
+        }   
+        throw new Error(language+" specified language nothing! choose from the language list: "+languages());
+    }
+
+    /**
+     * Converts to a number in Hungarian
+     * @param number of type long
+     * @see MZNumberConvert#arrayUpload(int)
+     * @see MZNumberConvert#hunNumberNameResult()
+     * @return number name 
+     */
+    private String hunNumberName(long number){
+        compareValue = number;
         if(compareValue>0 || compareValue<0){
-            char[] charArray = String.valueOf(number).toCharArray();
-            int[] numberArray = new int[charArray.length];
-            int j=0, negative=0;
+            charArray = String.valueOf(number).toCharArray();
+            numberArray = new int[charArray.length];
+            count=0; 
+            negative=0;
             if(compareValue>0){
                 for(int i=charArray.length-1; i>=0; i--){
-                    numberArray[j]=Character.getNumericValue(charArray[i]);
-                    j++; 
+                    arrayUpload(i); 
                 }
             }
             else{
                 for(int i=charArray.length-1; i>0; i--){
-                    numberArray[j]=Character.getNumericValue(charArray[i]);
-                    j++; 
+                    arrayUpload(i); 
                 }
                 negative=1;
             }
-            int[] reverseArray = new int[12];
-            for(int i=0; i<reverseArray.length; i++){
-                try{
-                    reverseArray[i]=numberArray[i];
-                }
-                catch(ArrayIndexOutOfBoundsException e){
-                    reverseArray[i]=0;
-                }
-            }
-            return hun7[negative]+
-            reviewNumber(reverseArray[9], reverseArray[10], reverseArray[11], reverseArray, 12, hun6[3])+
-            reviewNumber(reverseArray[6], reverseArray[7], reverseArray[8], reverseArray, 9, hun6[2])+
-            reviewNumber(reverseArray[3], reverseArray[4], reverseArray[5], reverseArray, 6, hun6[1])+
-            reviewNumber(reverseArray[0], reverseArray[1], reverseArray[2], reverseArray, 3 );
+            return hunNumberNameResult();
         }
         else{
             return hun5[0];
         }
     }
 
-    private static String reviewNumber(int a, int b, int c, int[] d, int index){
+    /**
+     * Converts to a number in Hungarian
+     * @param number of type BigInteger
+     * @see java.math.BigInteger
+     * @see MZNumberConvert#arrayUpload(int)
+     * @see MZNumberConvert#hunNumberNameResult()
+     * @return number name 
+     */
+    private String hunNumberNameBig(BigInteger number){
+        compareValue = number.compareTo(new BigInteger("0"));
+        if(compareValue>0 || compareValue<0){
+            charArray = String.valueOf(number).toCharArray();
+            numberArray = new int[charArray.length];
+            count=0; 
+            negative=0;
+            if(compareValue>0){
+                for(int i=charArray.length-1; i>=0; i--){
+                    arrayUpload(i); 
+                }
+            }
+            else{
+                for(int i=charArray.length-1; i>0; i--){
+                    arrayUpload(i); 
+                }
+                negative=1;
+            }
+            return hunNumberNameResult();
+        }
+        else{
+            return hun5[0];
+        }
+    }
+
+    /**
+     * Array uploading and counting
+     * Character that carries a number conversion to int type
+     * @param i for loop counter value
+     */
+    private void arrayUpload(int i){
+        numberArray[count]=Character.getNumericValue(charArray[i]);
+        count++; 
+    }
+
+    /**
+     * Returns the final result but only applied at the end of the corresponding method.
+     * @see MZNumberConvert#reverseArray(int[])
+     * @see MZNumberConvert#reviewNumber(int, int, int, int[], int, String)
+     * @return final result
+     */
+    private String hunNumberNameResult(){
+        int[] reverseArray = reverseArray(numberArray);
+        return (hun7[negative]+
+            reviewNumber(9, 10, 11, reverseArray, 12, hun6[3])+
+            reviewNumber(6, 7, 8, reverseArray, 9, hun6[2])+
+            reviewNumber(3, 4, 5, reverseArray, 6, hun6[1])+
+            reviewNumber(0, 1, 2, reverseArray, 3, null)
+        );
+    }
+
+    /**
+     * Returns the elements of the desired array in reverse order in an array of 12 elements.
+     * Empty elements assume the value 0 by definition.
+     * @param numberArray
+     * @see MZNumberConvert#arrayUpload(int)
+     * @see java.lang.ArrayIndexOutOfBoundsException
+     * @return numberArray revers version of 12 elements
+     */
+    private int[] reverseArray(int[] numberArray){
+        int[] reverseArray = new int[12];
+        for(int i=0; i<reverseArray.length; i++){
+            try{
+                reverseArray[i]=numberArray[i];
+            }
+            catch(ArrayIndexOutOfBoundsException e){
+                reverseArray[i]=0;
+            }
+        }
+        return reverseArray;
+    }
+
+    /**
+     * Converts the original number to 3 decimals,
+     * then to hundreds and tens, and reverses single-decimal
+     * values in accordance with Hungarian grammar rules
+     * @param hundreds element of array with hundredth index should be hundreds
+     * @param tens element of array with index should be tens
+     * @param ones element of array with index should be ones
+     * @param array array from which the elements are taken out for examination
+     * @param index how many items to review
+     * @param extension can be specified to contain the text "thousands", "millions", "billions".
+     * @see MZNumberConvert#reverseArray(int[])
+     * @see MZNumberConvert#hyphen(int[], int)
+     * @see MZNumberConvert#branches(int, int, int, String, String)
+     * @return number name with hyphens
+     */
+    private String reviewNumber(int hundreds, int tens, int ones, int[] array, int index, String extension){
+        return branches(array[hundreds], array[tens], array[ones], hyphen(array, index), extension);
+    }
+
+    /**
+     * Decides whether a hyphen must be between the digits of the number name.
+     * If the number is greater than 2000 and is not rounded to 3 decimal places, a hyphen is used
+     * @param array
+     * @param index 
+     * @see MZNumberConvert#reverseArray(int[])
+     * @return if without hyphen else with hyphen
+     */
+    private String hyphen(int[] array, int index){
         String hyphen = "";
-        for(int i=index; i<d.length; i++){
+        for(int i=index; i<array.length; i++){
             if(i==3){
-                if(d[3]!=0 && d[3]!=1){
+                if(array[3]!=0 && array[3]!=1){
                     hyphen = "-";
                     break;
                 }
                 continue;
             }
-            else if(d[i]!=0){
+            else if(array[i]!=0){
                 hyphen = "-";
                 break;
             }
         }
-        if(c==0 && b==0 && a==0){
-            return splitStr+"";
+        return hyphen;
+    }
+    
+    /**
+     * Given 3-decimal number, checking its digits in a complicated logical branching, plus the hyphen and extension must be decided
+     * @param ones
+     * @param tens
+     * @param hundreds
+     * @param hyphen substitutes a given hyphen into the decimal points of the number name if necessary.
+     * @param extension can be specified to contain the text "thousands", "millions", "billions".
+     * @see MZNumberConvert#reviewNumber(int, int, int, int[], int, String)
+     * @see MZNumberConvert#hyphen()
+     * @return return number name from complex branching
+     */
+    private String branches(int ones, int tens, int hundreds, String hyphen, String extension){
+        if(ones==0 && tens==0 && ones==0){
+            return split+"";
         }
-        else if(c==0 && b==0 && a!=0){
-            return hyphen+splitStr+hun1[a];
+        else if(hundreds==0 && tens==0 && ones!=0){
+            return hyphen+split+((extension==null)? hun1[ones]:hun2[ones]+extension);
         }
-        else if(c==0 && b==1 && a==0){
-            return hyphen+splitStr+hun5[1];
+        else if(hundreds==0 && tens==1 && ones==0){
+            return hyphen+split+hun5[1]+((extension==null)? "":extension);
         }
-        else if(c==0 && b==2 && a==0){
-            return hyphen+splitStr+hun5[2];
+        else if(hundreds==0 && tens==2 && ones==0){
+            return hyphen+split+hun5[2]+((extension==null)? "":extension);
         }
-        else if(c==0 && b!=0){
-            return hyphen+splitStr+hun4[b]+hun1[a];
+        else if(hundreds==0 && tens!=0){
+            return hyphen+split+hun4[tens]+hun1[ones]+((extension==null)? "":extension);
         }
-        else if(c!=0 && b==0 && a==0){
-            return hyphen+splitStr+hun2[c]+hun6[0];
+        else if(hundreds!=0 && tens==0 && ones==0){
+            return hyphen+split+hun2[hundreds]+hun6[0]+((extension==null)? "":extension);
         }
-        else if(c!=0 && b==1 && a==0){
-            return hyphen+splitStr+hun2[c]+hun6[0]+hun5[1];
+        else if(hundreds!=0 && tens==1 && ones==0){
+            return hyphen+split+hun2[hundreds]+hun6[0]+hun5[1]+((extension==null)? "":extension);
         }
-        else if(c!=0 && b==2 && a==0){
-            return hyphen+splitStr+hun2[c]+hun6[0]+hun5[2];
+        else if(hundreds!=0 && tens==2 && ones==0){
+            return hyphen+split+hun2[hundreds]+hun6[0]+hun5[2]+((extension==null)? "":extension);
         }
         else{
-            return hyphen+splitStr+hun2[c]+hun6[0]+hun4[b]+hun1[a];
+            return hyphen+split+hun2[hundreds]+hun6[0]+hun4[tens]+((extension==null)? hun1[ones]:hun3[ones]+extension);
         }
     }
 
-    private static String reviewNumber(int a, int b, int c, int[] d, int index, String x){
-        String hyphen = "";
-        for(int i=index; i<d.length; i++){
-            if(d[i]!=0){
-                hyphen = "-";
-                break;
-            }
+    /**
+     * Lists the existing languages through which the number can be translated number name
+     * @return list of languages
+     */
+    private String languages(){
+        String results = "";
+        for(String language : languages){
+            results += language+" ";
         }
-        if(c==0 && b==0 && a==0){
-            return splitStr+"";
-        }
-        else if(c==0 && b==0 && a!=0){
-            return hyphen+splitStr+hun2[a]+x;
-        }
-        else if(c==0 && b==1 && a==0){
-            return hyphen+splitStr+hun5[1]+x;
-        }
-        else if(c==0 && b==2 && a==0){
-            return hyphen+splitStr+hun5[2]+x;
-        }
-        else if(c==0 && b!=0){
-            return hyphen+splitStr+hun4[b]+hun1[a]+x;
-        }
-        else if(c!=0 && b==0 && a==0){
-            return hyphen+splitStr+hun2[c]+hun6[0]+x;
-        }
-        else if(c!=0 && b==1 && a==0){
-            return hyphen+splitStr+hun2[c]+hun6[0]+hun5[1]+x;
-        }
-        else if(c!=0 && b==2 && a==0){
-            return hyphen+splitStr+hun2[c]+hun6[0]+hun5[2]+x;
-        }
-        else{
-            return hyphen+splitStr+hun2[c]+hun6[0]+hun4[b]+hun3[a]+x;
-        }
+        return results;
     }
 }

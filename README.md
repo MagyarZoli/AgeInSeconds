@@ -51,8 +51,8 @@ It inherits this and changes its arguments to the Age class
     @Override
     public void runAge(){
         textNumber.setText(new DecimalFormat().format(Long.parseLong(resultOut())));
-        BigInteger bigInteger = new BigInteger(resultOut());
-        String[] splitArray = (numberConvert.conversionNumberName(bigInteger, "hu")).split("[.]");
+        bigInteger = new BigInteger(resultOut());
+        splitArray = (numberConvert.conversionNumberName(bigInteger, "hu")).split("[.]");
         splitText(splitArray);
     }
 ```

@@ -13,7 +13,9 @@ extends MZElapsedSeconds{
     private JTextField textNumberName2;
     private JTextField textNumberName3;
     private JTextField textNumberName4;
-    
+    private BigInteger bigInteger;
+    private String[] splitArray;
+
     private MZNumberConvert numberConvert = new MZNumberConvert(".");
 
     public Age(
@@ -35,8 +37,8 @@ extends MZElapsedSeconds{
     @Override
     public void runAge(){
         textNumber.setText(new DecimalFormat().format(Long.parseLong(resultOut())));
-        BigInteger bigInteger = new BigInteger(resultOut());
-        String[] splitArray = (numberConvert.conversionNumberName(bigInteger, "hu")).split("[.]");
+        bigInteger = new BigInteger(resultOut());
+        splitArray = (numberConvert.conversionNumberName(bigInteger, "hu")).split("[.]");
         splitText(splitArray);
     }
 
