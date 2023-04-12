@@ -19,19 +19,77 @@ import java.math.BigInteger;
  * @author <a href=https://github.com/MagyarZoli>Magyar Zoltán</a>
  */
 public class MZNumberConvert { 
+    
+    /**
+     * list of the 1st digit of an integer
+     */
     private final String[] hun1 = new String[]{"","egy","kettő","három","négy","öt","hat","hét","nyolc","kilenc"};
+    
+    /**
+     * list of the 4th / 7th / 10th digits of an integer if the next value is not 0 or 1.
+     */
     private final String[] hun2 = new String[]{"","","két","három","négy","öt","hat","hét","nyolc","kilenc"};
+    
+    /**
+     * list of 4th/7th/10th digits of an integer
+     */
     private final String[] hun3 = new String[]{"","egy","két","három","négy","öt","hat","hét","nyolc","kilenc"};
+    
+    /**
+     * list of 2nd/ 5th/ 8th digits of an integer
+     */
     private final String[] hun4 = new String[]{"","tizen","huszon","harminc","negyven","ötven","hatvan","hetven","nyolcvan","kilencven"};
+    
+    /**
+     * list of the 2nd/5th/8th digit of an integer if the number behind it is 0.
+     * The value of zero is also loaded here.
+     */
     private final String[] hun5 = new String[]{"nulla","tíz","húsz"};
+    
+    /**
+     * addition, depending on the size of the number.
+     */
     private final String[] hun6 = new String[]{"száz","ezer","milllió","milliárd"};
+    
+    /**
+     * positive or negative keywords of number.
+     */
     private final String[] hun7 = new String[]{"","minusz "};
+    
+    /**
+     * storing languages in an array
+     */
     private final String[] languages = new String[]{"hu"};
+    
+    /**
+     * splitting number into characters storing in array 
+     */
     private char[] charArray;
+
+    /**
+     * converting and loading the characters of a chunked number into the array.
+     */
     private int[] numberArray;
+
+    /**
+     * Compares this BigInteger with the specified BigInteger.
+     * @see BigInteger#compareTo
+     */
     private long compareValue;
+
+    /**
+     * counter counts the digits of the number, discards a negative sign '-' if there is one.
+     */
     private int count;
+
+    /**
+     * if the number is negative, it is filled with a negative keyword
+     */
     private int negative;
+
+    /**
+     * the character or character string that divides the number.
+     */
     private String split;
 
     /**
