@@ -1,4 +1,4 @@
-## Age in Seconds
+### Age in Seconds
 
 ## Description
 Determination of elapsed seconds from the date.
@@ -6,52 +6,45 @@ Determination of elapsed seconds from the date.
 ## Features
 Allows the user to enter a date and calculate the number of seconds that have passed or not yet passed.
 Returns the number and number name of the result in `Hungarian`.
-Uses two external classes: MZElapsedSeconds and MZNumberConvert.
+Uses two external classes: ElapsedSeconds and NumberConvert.
 
 ## Image
 ![alt text](https://github.com/MagyarZoli/AgeInSeconds/blob/master/image/Image1.png)
 
-Installation
-To use this program, you will need to have Java installed on your computer. You can download Java from the [official Java website](https://www.java.com/en/download/).
-
-Once you have Java installed, follow these steps to install and run the program:
-
-Clone this repository to your local machine using the command:
-```bash
-git clone https://github.com/MagyarZoli/AgeInSeconds.git
-```
-
-## MZElapsedSeconds and MZNumberConvert
+## ElapsedSeconds and NumberConvert
 Please note that this project uses the following external classes:
 
-- [MZElapsedSeconds](https://github.com/MagyarZoli/MZElapsedSeconds)
-- [MZNumberConvert](https://github.com/MagyarZoli/MZNumberConvert)
+- [MZElapsedSeconds](https://github.com/MagyarZoli/ElapsedSeconds)
+- [MZNumberConvert](https://github.com/MagyarZoli/NumberConvert)
 
 For more information about these classes, please refer to their respective documentation.
 
 ## Example
-The abstract method of MZElapsedSeconds,
-which inherits the run method from TimerTask, is implanted into it.
+The ElapsedSeconds method,
+which inherits the run method from TimerTask.
 It inherits this and changes its arguments to the Age class
 ```java
     @Override
     public void run(){
         try{
-            resultout = (decimalFormt.format(dateToSeconds(simpleDateFormat.format(Calendar.getInstance().getTime()), simpleDateFormat)-dateToSeconds(resultin, simpleDateFormat)));
-            runAge();
+            resultout = (
+                decimalFormt.format(
+                    dateToSeconds(simpleDateFormat.format(Calendar.getInstance().getTime()), simpleDateFormat)-
+                    dateToSeconds(resultin, simpleDateFormat)
+                )
+            );
         }
         catch(ParseException e){
             e.printStackTrace();
         }
     }
-
-    public abstract void runAge();
 ```
 ```java
     @Override
-    public void runAge(){
-        textNumber.setText(new DecimalFormat().format(Long.parseLong(resultOut())));
-        bigInteger = new BigInteger(resultOut());
+    public void run(){
+        super.run();
+        textNumber.setText(new DecimalFormat().format(Long.parseLong(getResultOut())));
+        bigInteger = new BigInteger(getResultOut());
         splitArray = (numberConvert.conversionNumberName(bigInteger, "hu")).split("[.]");
         splitText(splitArray);
     }
@@ -74,13 +67,13 @@ Using ActionListener which is implemented for GuiButton
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==guiButton){
-            age.resultInAdd(timePicker.selectTime());
+            age.setResultIn(timePicker.selectTime());
         }
     }
 ```
 
-## Authors
+# Authors
 Magyar Zoltán
 
-## Contact
+# Contact
 magyarz95@gmail.com

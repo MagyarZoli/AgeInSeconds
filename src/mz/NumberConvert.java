@@ -1,4 +1,5 @@
-package MZ;
+package mz;
+
 
 import java.lang.ArrayIndexOutOfBoundsException;
 import java.math.BigInteger;
@@ -18,7 +19,7 @@ import java.math.BigInteger;
  * @since 1.3
  * @author <a href=https://github.com/MagyarZoli>Magyar Zoltán</a>
  */
-public class MZNumberConvert { 
+public class NumberConvert { 
     
     /**
      * list of the 1st digit of an integer
@@ -95,7 +96,7 @@ public class MZNumberConvert {
     /**
      * By default, it does not split the number name.
      */
-    public MZNumberConvert(){
+    public NumberConvert(){
         this.split="";
     }
     
@@ -104,7 +105,7 @@ public class MZNumberConvert {
      * If the argument is null, it does not split the name of the number.
      * @param splitStr separates the name of the number
      */
-    public MZNumberConvert(String split){
+    public NumberConvert(String split){
         if(split==null){
             this.split="";
         }
@@ -136,8 +137,8 @@ public class MZNumberConvert {
      * </ul>
      * @param number of type long
      * @param language 
-     * @see MZNumberConvert#hunNumberName(long)
-     * @see MZNumberConvert#languages()
+     * @see NumberConvert#hunNumberName(long)
+     * @see NumberConvert#languages()
      * @throws Error if the specified language is not available.
      */
     public String conversionNumberName(long number, String language){
@@ -156,8 +157,8 @@ public class MZNumberConvert {
      * @param number of type BigInteger
      * @param language 
      * @see java.math.BigInteger
-     * @see MZNumberConvert#hunNumberNameBig(BigInteger)
-     * @see MZNumberConvert#languages()
+     * @see NumberConvert#hunNumberNameBig(BigInteger)
+     * @see NumberConvert#languages()
      * @throws Error if the specified language is not available.
      */
     public String conversionNumberName(BigInteger number, String language){
@@ -170,8 +171,8 @@ public class MZNumberConvert {
     /**
      * Converts to a number in Hungarian
      * @param number of type long
-     * @see MZNumberConvert#arrayUpload(int)
-     * @see MZNumberConvert#hunNumberNameResult()
+     * @see NumberConvert#arrayUpload(int)
+     * @see NumberConvert#hunNumberNameResult()
      * @return number name 
      */
     private String hunNumberName(long number){
@@ -203,8 +204,8 @@ public class MZNumberConvert {
      * Converts to a number in Hungarian
      * @param number of type BigInteger
      * @see java.math.BigInteger
-     * @see MZNumberConvert#arrayUpload(int)
-     * @see MZNumberConvert#hunNumberNameResult()
+     * @see NumberConvert#arrayUpload(int)
+     * @see NumberConvert#hunNumberNameResult()
      * @return number name 
      */
     private String hunNumberNameBig(BigInteger number){
@@ -244,8 +245,8 @@ public class MZNumberConvert {
 
     /**
      * Returns the final result but only applied at the end of the corresponding method.
-     * @see MZNumberConvert#reverseArray(int[])
-     * @see MZNumberConvert#reviewNumber(int, int, int, int[], int, String)
+     * @see NumberConvert#reverseArray(int[])
+     * @see NumberConvert#reviewNumber(int, int, int, int[], int, String)
      * @return final result
      */
     private String hunNumberNameResult(){
@@ -262,7 +263,7 @@ public class MZNumberConvert {
      * Returns the elements of the desired array in reverse order in an array of 12 elements.
      * Empty elements assume the value 0 by definition.
      * @param numberArray
-     * @see MZNumberConvert#arrayUpload(int)
+     * @see NumberConvert#arrayUpload(int)
      * @see java.lang.ArrayIndexOutOfBoundsException
      * @return numberArray revers version of 12 elements
      */
@@ -289,9 +290,9 @@ public class MZNumberConvert {
      * @param array array from which the elements are taken out for examination
      * @param index how many items to review
      * @param extension can be specified to contain the text "thousands", "millions", "billions".
-     * @see MZNumberConvert#reverseArray(int[])
-     * @see MZNumberConvert#hyphen(int[], int)
-     * @see MZNumberConvert#branches(int, int, int, String, String)
+     * @see NumberConvert#reverseArray(int[])
+     * @see NumberConvert#hyphen(int[], int)
+     * @see NumberConvert#branches(int, int, int, String, String)
      * @return number name with hyphens
      */
     private String reviewNumber(int hundreds, int tens, int ones, int[] array, int index, String extension){
@@ -303,7 +304,7 @@ public class MZNumberConvert {
      * If the number is greater than 2000 and is not rounded to 3 decimal places, a hyphen is used
      * @param array
      * @param index 
-     * @see MZNumberConvert#reverseArray(int[])
+     * @see NumberConvert#reverseArray(int[])
      * @return if without hyphen else with hyphen
      */
     private String hyphen(int[] array, int index){
@@ -331,8 +332,8 @@ public class MZNumberConvert {
      * @param hundreds
      * @param hyphen substitutes a given hyphen into the decimal points of the number name if necessary.
      * @param extension can be specified to contain the text "thousands", "millions", "billions".
-     * @see MZNumberConvert#reviewNumber(int, int, int, int[], int, String)
-     * @see MZNumberConvert#hyphen()
+     * @see NumberConvert#reviewNumber(int, int, int, int[], int, String)
+     * @see NumberConvert#hyphen()
      * @return return number name from complex branching
      */
     private String branches(int ones, int tens, int hundreds, String hyphen, String extension){

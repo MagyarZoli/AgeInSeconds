@@ -2,6 +2,6 @@ public class Test {
 
     public static void main(String[] args)
     throws Exception{
-        GuiFrame guiFrame = new GuiFrame();
+        AgeInSeconds guiFrame = new AgeInSeconds();
     }
 }
