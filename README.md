@@ -14,8 +14,8 @@ Uses two external classes: ElapsedSeconds and NumberConvert.
 ## ElapsedSeconds and NumberConvert
 Please note that this project uses the following external classes:
 
-- [MZElapsedSeconds](https://github.com/MagyarZoli/ElapsedSeconds)
-- [MZNumberConvert](https://github.com/MagyarZoli/NumberConvert)
+- [ElapsedSeconds](https://github.com/MagyarZoli/ElapsedSeconds)
+- [NumberConvert](https://github.com/MagyarZoli/NumberConvert)
 
 For more information about these classes, please refer to their respective documentation.
 

@@ -27,7 +27,7 @@ import mz.NumberConvert;
  * @see ElapsedSeconds
  * @see NumberConvert
  * @see Age 
- * @since 1.0
+ * @since 1.1
  * @author <a href=https://github.com/MagyarZoli>Magyar Zoltán</a>
  */
 public class AgeInSeconds
