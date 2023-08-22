@@ -9,7 +9,7 @@ Returns the number and number name of the result in `Hungarian`.
 Uses two external classes: ElapsedSeconds and NumberConvert.
 
 ## Image
-![alt text](https://github.com/MagyarZoli/AgeInSeconds/blob/master/image/Image1.png)
+![alt text](./src/main/resources/image/Image1.png)
 
 ## ElapsedSeconds and NumberConvert
 Please note that this project uses the following external classes:

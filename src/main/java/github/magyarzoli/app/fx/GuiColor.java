@@ -1,11 +1,8 @@
-package data;
+package github.magyarzoli.app.fx;
 
 import java.awt.Color;
 
-/**
- * final class for storing window colors
- */
-public final class GuiColor{
+public final class GuiColor {
 
     /**
      * button color
@@ -25,5 +22,5 @@ public final class GuiColor{
     /**
      * background color
      */
-    public final static Color COMPONTENT_BACKGROUND = new Color (0x121212);
+    public final static Color COMPONENT_BACKGROUND = new Color (0x121212);
 }
