@@ -1,14 +1,12 @@
-package github.magyarzoli.app.fx;
+package github.magyarzoli.app.swing;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GuiTextField
-extends JTextField {
+public class GuiLabel
+extends JLabel {
 
-    GuiTextField(int fontSize){
-        this.setEditable(true);
-        this.setBounds(0, 60, 500, 40);
+    GuiLabel(int fontSize){
         this.setFocusable(false);
         this.requestFocusInWindow(false);
         this.setBorder(BorderFactory.createEmptyBorder());

@@ -1,4 +1,4 @@
-package github.magyarzoli.app.fx;
+package github.magyarzoli.app.swing;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -59,7 +59,7 @@ extends JPanel {
      * @param       dateFormat text version of date.
      * @param       timeFormat text version of time.
      * @param       fontSize specified font size.
-     * @see         github.magyarzoli.app.fx.TimePicker#timeSpinner() timeSpinner()
+     * @see         github.magyarzoli.app.swing.TimePicker#timeSpinner() timeSpinner()
      */
     TimePicker(String dateFormat, String timeFormat, int fontSize){
         this.dateFormat = dateFormat;

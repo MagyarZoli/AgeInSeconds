@@ -1,4 +1,4 @@
-package github.magyarzoli.app.fx;
+package github.magyarzoli.app.swing;
 
 import javax.swing.*;
 import java.awt.*;

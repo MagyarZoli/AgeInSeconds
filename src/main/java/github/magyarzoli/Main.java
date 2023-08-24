@@ -1,6 +1,6 @@
 package github.magyarzoli;
 
-import github.magyarzoli.app.fx.AgeInSeconds;
+import github.magyarzoli.app.swing.AgeInSeconds;
 
 public class Main {
 
